@@ -1,0 +1,4 @@
+chat-client/node_modules/
+chat-client/package-lock.json
+server/server_venv/
+server/__pycache__/

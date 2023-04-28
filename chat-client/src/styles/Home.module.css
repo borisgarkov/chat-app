@@ -1,0 +1,45 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: baseline;
+    padding: 6rem;
+    min-height: 100vh;
+}
+
+.title {
+    margin-bottom: 24px;
+}
+
+.textfields {
+    display: flex;
+    gap: 8px;
+    margin: 8px;
+}
+
+.textfields>input {
+    font-size: 1.15rem;
+    display: block;
+}
+
+.textfields>label {
+    font-size: 1.15rem;
+    display: block;
+}
+
+.buttonLogin {
+    font-size: 1.15rem;
+    padding: 8px 36px;
+    border-radius: 5px;
+    margin-top: 24px;
+    display: inline-block;
+}
+
+.buttonLogin:hover {
+    cursor: pointer;
+}
+
+.register {
+    margin-top: 16px;
+    text-decoration: underline;
+}
