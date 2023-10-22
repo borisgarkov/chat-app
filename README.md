@@ -1,2 +1,3 @@
 # chat-app
-client - GatsbyJS -- server - FastAPI
+client - GatsbyJS 
+server - FastAPI
