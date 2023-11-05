@@ -1,8 +1,12 @@
 import * as React from "react";
 import { navigate } from 'gatsby';
-import { BACKEND_URL, LOGIN_ENDPOINT, ACCESS_TOKEN, CHAT_URL, USER_ID } from "../components/constants";
+import { BACKEND_URL, LOGIN_ENDPOINT, CHAT_URL, USER_ID, AUTHENTICATED } from "../components/constants";
+import Register from "../components/Register";
 
 export default function Home() {
+    console.log('document.cookie')
+    console.log(document.cookie)
+
     const [credentials, setCredentials] = React.useState({
         username: '',
         password: '',
@@ -32,6 +36,7 @@ export default function Home() {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: formData,
+            credentials: 'include',
         })
 
         if (response.ok === false) {
@@ -41,7 +46,7 @@ export default function Home() {
 
         const access_token = await response.json();
 
-        localStorage.setItem(ACCESS_TOKEN, access_token['access_token'])
+        localStorage.setItem(AUTHENTICATED, true)
         localStorage.setItem(USER_ID, access_token['user_id'])
         navigate(CHAT_URL)
     }
@@ -58,6 +63,8 @@ export default function Home() {
 
                 <input type="submit" value="Submit" />
             </form>
+
+            <Register />
         </>
     )
 }

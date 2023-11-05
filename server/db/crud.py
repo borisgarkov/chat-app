@@ -45,3 +45,10 @@ def fetch_user_messages(sender_id: int, recipient_id: int, db: Session):
         | ((models.Message.sender_id == recipient_id)
            & (models.Message.recipient_id == sender_id))
     ).all()
+
+
+def fetch_unread_messsages(recipient_id: int, db: Session):
+    return db.query(models.Message).filter(
+        (models.Message.recipient_id == recipient_id)
+        & (models.Message.is_message_read == False)
+    ).all()

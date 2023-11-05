@@ -31,33 +31,19 @@ export default function PrivateChat(props) {
     }
 
     const chatHistory = useFetchChatHistory(props.id);
-    console.log(chatHistory)
 
     const [ws, setWs] = React.useState();
-
-    const bottomElement = React.useRef();
 
     React.useEffect(() => {
         const websocket = new WebSocket(WEBSOCKET_URL + props.id);
         setWs(websocket)
 
-        console.log(websocket)
-
-        websocket.onopen = (e) => { websocket.send(localStorage.getItem(ACCESS_TOKEN)) }
+        websocket.onopen = () => { websocket.send(localStorage.getItem(ACCESS_TOKEN)) }
         websocket.onmessage = (e) => { updateChat(<Message user={RECIPIENT} message={e.data} />) }
+        websocket.onclose = () => { console.log('closing websocket') }
 
-        return () => {
-            console.log('closing websocket')
-            websocket.close()
-        }
+        return () => { websocket.close() }
     }, [chat])
-
-    React.useEffect(() => {
-        bottomElement.current.scrollIntoView({
-            behavior: "smooth",
-            block: "end",
-        })
-    }, [])
 
     const sendMessage = (e) => {
         e.preventDefault()
@@ -102,7 +88,6 @@ export default function PrivateChat(props) {
                     chat.map((message, indx) => <React.Fragment key={indx + message}>{message}</React.Fragment>)
                 }
 
-                <div ref={bottomElement}></div>
             </div>
 
             <form style={{ marginTop: '100px' }} onSubmit={sendMessage}>

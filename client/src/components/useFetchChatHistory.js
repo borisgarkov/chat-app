@@ -14,14 +14,6 @@ export default function useFetchChatHistory(recipient_id) {
             + "token=" + localStorage.getItem(ACCESS_TOKEN)
         );
 
-        console.log(
-            BACKEND_URL
-            + GET_CHAT_HISTORY_ENDPOINT
-            + "?"
-            + "recipient_id=" + recipient_id
-            + "token=" + localStorage.getItem(ACCESS_TOKEN)
-        )
-
         if (response.ok === false) {
             alert('Error while chat history')
             return
